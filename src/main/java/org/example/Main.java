@@ -49,7 +49,7 @@ public class Main {
 
 
 
-        DijkstraSearch<String> dijkstra = new DijkstraSearch<>(graph.getVertices());
+        DijkstraSearch<String> dijkstra = new DijkstraSearch<>();
         System.out.println("\nDijkstra's shortest path from vertex A:");
         Map<Vertex<String>, Double> distances = dijkstra.dijkstra(v1, graph.getVertices());
         distances.forEach((vertex, distance) -> System.out.println(vertex + " : " + distance));

@@ -3,10 +3,6 @@ package org.example;
 import java.util.*;
 
 public class DijkstraSearch<V> {
-    Set<Vertex<V>> allVertices = new HashSet<>();
-    public DijkstraSearch(Set<Vertex<V>> allVertices) {
-        this.allVertices = allVertices;
-    }
     public Map<Vertex<V>, Double> dijkstra(Vertex<V> start, Set<Vertex<V>> allVertices) {
         Map<Vertex<V>, Double> distances = new HashMap<>();
         PriorityQueue<VertexDistance<V>> priorityQueue = new PriorityQueue<>(Comparator.comparingDouble(VertexDistance::getDistance));
@@ -45,7 +41,6 @@ public class DijkstraSearch<V> {
         PriorityQueue<VertexDistance<V>> queue = new PriorityQueue<>(Comparator.comparingDouble(VertexDistance::getDistance));
         Map<Vertex<V>, Vertex<V>> previous = new HashMap<>();
 
-        // Initialize distances
         for (Vertex<V> vertex : graph.getVertices()) {
             if (vertex.equals(startNode)) {
                 distance.put(vertex, 0.0);
@@ -60,7 +55,6 @@ public class DijkstraSearch<V> {
             VertexDistance<V> current = queue.poll();
             Vertex<V> currentVertex = current.getVertex();
 
-            // If we reached the endNode, reconstruct and return the path
             if (currentVertex.equals(endNode)) {
                 List<Vertex<V>> path = new ArrayList<>();
                 while (previous.containsKey(currentVertex)) {
@@ -72,7 +66,6 @@ public class DijkstraSearch<V> {
                 return path;
             }
 
-            // Update distances for adjacent vertices
             for (Map.Entry<Vertex<V>, Double> entry : currentVertex.getAdjacentVertices().entrySet()) {
                 Vertex<V> neighbor = entry.getKey();
                 double weight = entry.getValue();
@@ -86,7 +79,6 @@ public class DijkstraSearch<V> {
             }
         }
 
-        // If endNode is unreachable, return null
         return null;
     }
 
